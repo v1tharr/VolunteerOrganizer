@@ -1,0 +1,39 @@
+﻿<Window x:Class="Hoz_Shop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hoz_Shop"
+        mc:Ignorable="d"
+        Title="Окно Авторизации" Height="513" Width="690" MinWidth="690" MinHeight="513" MaxHeight="513" MaxWidth="690">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="137*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid
+                      Background="DarkCyan" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85*"/>
+                <ColumnDefinition Width="53*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Логин" HorizontalAlignment="Left" Margin="223,175,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.944,-0.75" Foreground="#DDFFFFFF" FontSize="16"/>
+            <Label Content="Пароль" HorizontalAlignment="Left" Margin="223,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.944,-0.75" Foreground="#DDFFFFFF" FontSize="16"/>
+            <TextBox x:Name="tblog" HorizontalAlignment="Left" Height="26" Margin="345,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="White" BorderBrush="#89FFFFFF" FontSize="16" Grid.ColumnSpan="2"/>
+            <Button Content="Войти" HorizontalAlignment="Left" Margin="314,297,0,0" VerticalAlignment="Top" Width="110" Height="34" RenderTransformOrigin="0.367,0.603" Click="Button_Click" FontSize="16">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-359.933"/>
+                        <TranslateTransform X="-0.004" Y="-0.017"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Label Content="Авторизация" HorizontalAlignment="Left" Margin="305,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.944,-0.75" FontWeight="Bold" FontSize="18" Foreground="#DDFFFFFF" Grid.ColumnSpan="2"/>
+            <PasswordBox x:Name="tb2" HorizontalAlignment="Left" Margin="345,230,0,0" VerticalAlignment="Top" Width="120" Foreground="White" BorderBrush="#89FFFFFF" FontSize="16" Grid.ColumnSpan="2"/>
+        </Grid>
+
+    </Grid>
+</Window>

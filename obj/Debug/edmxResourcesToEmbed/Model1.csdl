@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="User11_Sgr2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UserEvents" Relationship="Self.FK__UserEvent__Event__55009F39" FromRole="Events" ToRole="UserEvents" />
+    <NavigationProperty Name="UserEvents1" Relationship="Self.FK__UserEvent__Event__5D95E53A" FromRole="Events" ToRole="UserEvents" />
+    <NavigationProperty Name="FinancialManagement" Relationship="Self.FK_EventID_New" FromRole="Events" ToRole="FinancialManagement" />
+  </EntityType>
+  <EntityType Name="FinancialManagement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="Int32" Nullable="false" />
+    <Property Name="AllocatedAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="SpentAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Events" Relationship="Self.FK_EventID_New" FromRole="FinancialManagement" ToRole="Events" />
+  </EntityType>
+  <EntityType Name="StartupCapital">
+    <Key>
+      <PropertyRef Name="StartupID" />
+    </Key>
+    <Property Name="StartupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserEvents">
+    <Key>
+      <PropertyRef Name="UserEventID" />
+    </Key>
+    <Property Name="UserEventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="EventID" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Events" Relationship="Self.FK__UserEvent__Event__55009F39" FromRole="UserEvents" ToRole="Events" />
+    <NavigationProperty Name="Events1" Relationship="Self.FK__UserEvent__Event__5D95E53A" FromRole="UserEvents" ToRole="Events" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__UserEvent__UserI__55F4C372" FromRole="UserEvents" ToRole="Users" />
+    <NavigationProperty Name="Users1" Relationship="Self.FK__UserEvent__UserI__5E8A0973" FromRole="UserEvents" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="UserEvents" Relationship="Self.FK__UserEvent__UserI__55F4C372" FromRole="Users" ToRole="UserEvents" />
+    <NavigationProperty Name="UserEvents1" Relationship="Self.FK__UserEvent__UserI__5E8A0973" FromRole="Users" ToRole="UserEvents" />
+  </EntityType>
+  <Association Name="FK__UserEvent__Event__55009F39">
+    <End Role="Events" Type="Self.Events" Multiplicity="0..1" />
+    <End Role="UserEvents" Type="Self.UserEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="UserEvents">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserEvent__Event__5D95E53A">
+    <End Role="Events" Type="Self.Events" Multiplicity="0..1" />
+    <End Role="UserEvents" Type="Self.UserEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="UserEvents">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventID_New">
+    <End Role="Events" Type="Self.Events" Multiplicity="1" />
+    <End Role="FinancialManagement" Type="Self.FinancialManagement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="FinancialManagement">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserEvent__UserI__55F4C372">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="UserEvents" Type="Self.UserEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserEvents">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserEvent__UserI__5E8A0973">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="UserEvents" Type="Self.UserEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserEvents">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VolunteerDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Events" EntityType="Self.Events" />
+    <EntitySet Name="FinancialManagement" EntityType="Self.FinancialManagement" />
+    <EntitySet Name="StartupCapital" EntityType="Self.StartupCapital" />
+    <EntitySet Name="UserEvents" EntityType="Self.UserEvents" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__UserEvent__Event__55009F39" Association="Self.FK__UserEvent__Event__55009F39">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="UserEvents" EntitySet="UserEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserEvent__Event__5D95E53A" Association="Self.FK__UserEvent__Event__5D95E53A">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="UserEvents" EntitySet="UserEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventID_New" Association="Self.FK_EventID_New">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="FinancialManagement" EntitySet="FinancialManagement" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserEvent__UserI__55F4C372" Association="Self.FK__UserEvent__UserI__55F4C372">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserEvents" EntitySet="UserEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserEvent__UserI__5E8A0973" Association="Self.FK__UserEvent__UserI__5E8A0973">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserEvents" EntitySet="UserEvents" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
